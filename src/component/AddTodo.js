@@ -10,7 +10,8 @@ class AddTodo extends Component {
     this.state = {
       content: "",
       date: "",
-      due : null,
+      due : null
+  
     };
   }
   // The handleChange function updates the react state with the new input value provided from the user and the current date/time.
@@ -23,11 +24,7 @@ class AddTodo extends Component {
     });
   };
 
-  handleDatePickerChange = (dueDate) => {
-    this.setState({
-      due: new Date(dueDate).toLocaleString(),
-    });
-  };
+  
   // The handleSubmit function collects the forms input and puts it into the react state.
   // event.preventDefault() is called to prevents default event behavior like refreshing the browser.
   // this.props.addTodo(this.state) passes the current state (or user input and current date/time) into the addTodo function defined
@@ -43,6 +40,11 @@ class AddTodo extends Component {
       });
     }
   };
+  handleDatePickerChange = (event) => {
+    this.setState({
+      due: new Date(event).toLocaleString(),
+    });
+  };
   render() {
     return (
       // 1. When rendering a component, you can render as many elements as you like as long as it is wrapped inside
@@ -54,6 +56,8 @@ class AddTodo extends Component {
       // 4. The value of the text field also should reflect the local state of this component.
       <div>
         <TextField
+          id="new-item-date"
+          data-testid="new-item-input"
           label="Add New Item"
           variant="outlined"
           onChange={this.handleChange}
@@ -62,6 +66,7 @@ class AddTodo extends Component {
         <LocalizationProvider dateAdapter={AdapterDateFns}>         
           <DesktopDatePicker
             id="new-item-date"
+            data-testid="new-item-date"
             label="Due Date"
             value={this.state.due}
             onChange={this.handleDatePickerChange}
@@ -69,6 +74,8 @@ class AddTodo extends Component {
           />
         </LocalizationProvider>
         <Button
+          id="new-item-date"
+          data-testid="new-item-button"
           style={{ marginLeft: "10px" }}
           onClick={this.handleSubmit}
           variant="contained"
